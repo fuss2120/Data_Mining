@@ -12,6 +12,7 @@ library(shiny)
 UIcharSetEnglish = list(headTitle = "Social Relationship Network Graph",
                         name = "By Name",
                         date = "By Date",
+                        dn = "By Name and Date",
                         vcolor = "Color for Persons",
                         ecolor = "Color for Lines",
                         vSize = "Size of Target Node",
@@ -35,6 +36,7 @@ shinyUI(fluidPage(
         sidebarPanel(
             checkboxInput("Date",UIcharSet$date,T),
             checkboxInput("Name",UIcharSet$name,F),
+            checkboxInput("Name and Date",UIcharSet$dn,F),
             selectInput(inputId = "bins",
                         label = "Target Names",
                         choices = c("BDD","Bilby","Darkwind","INeverCry","Jason Quinn","Legoktm","Lord Roem","Mattythewhite","Miniapolis","Mkdw",
@@ -385,32 +387,25 @@ shinyUI(fluidPage(
 "Sugarfish","Timwi","Tristanb","Vancouverguy","WhisperToMe"),
                         selected = "BDD"),
 sliderInput("StartDate",
-            "Dates:",
+            "Start Date:",
             min = as.Date("08/16/03","%m/%d/%y"),
             max = as.Date("06/05/13","%m/%d/%y"),
             value=as.Date("06/05/07"),timeFormat="%m/%d/%y"),
 sliderInput("EndDate",
-            "Dates:",
+            "End Date:",
             min = as.Date("08/16/03","%m/%d/%y "),
             max = as.Date("06/05/13","%m/%d/%y"),
             value=as.Date("06/05/07"),timeFormat="%m/%d/%y"),
-sliderInput('mainFontSize', UIcharSet$mainFontSize, min=1, max=10,
-            value=3, step=0.2, round=0),
 sliderInput('vSize', UIcharSet$vSize, min=.5, max=5.5,
             value=5, step=.1, round=0),
 sliderInput('eLWD', UIcharSet$eLWD, min=1, max=10,
             value=3, step=0.2, round=0),
-selectInput('vfcolor', UIcharSet$vfcolor, colorSet,selected="black"),
-selectInput('efcolor', UIcharSet$efcolor, colorSet,selected="black"),
-sliderInput('vLabelFontSize', UIcharSet$vLabelFontSize, min=1, max=10,
-            value=1.8, step=0.2, round=0),
-sliderInput('eLabelFontSize', UIcharSet$eLabelFontSize, min=1, max=10,
-            value=1.2, step=0.2, round=0)
+selectInput('vfcolor', UIcharSet$vfcolor, colorSet,selected="black")
         ),
 
         # Show a plot of the generated distribution
         mainPanel(
-            plotOutput("distPlot", width=1000, height = 1000)
+            plotOutput("distPlot", width=1200, height = 1200)
         )
     )
 ))
