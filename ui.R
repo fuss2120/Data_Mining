@@ -7,12 +7,16 @@
 #    http://shiny.rstudio.com/
 #
 
+
+
 library(shiny)
+library(ggplot2)
+library(mosaic)
 
 UIcharSetEnglish = list(headTitle = "Social Relationship Network Graph",
                         name = "By Name",
                         date = "By Date",
-                        dn = "By Name and Date",
+                        vote = "By Vote",
                         vcolor = "Color for Persons",
                         ecolor = "Color for Lines",
                         vSize = "Size of Target Node",
@@ -25,18 +29,19 @@ colorSet <- c("grey","skyblue","turquoise","tomato","tan","slateblue",
               "wheat","sienna","black")
 
 
-# Define UI for application that draws a histogram
 shinyUI(fluidPage(
+    
+    
 
     # Application title
-    titlePanel("Nework By Target"),
+    titlePanel("Social Network Structure"),
 
-    # Sidebar with a slider input for number of bins
     sidebarLayout(
+        
         sidebarPanel(
             checkboxInput("Date",UIcharSet$date,T),
             checkboxInput("Name",UIcharSet$name,F),
-            checkboxInput("Name and Date",UIcharSet$dn,F),
+            checkboxInput("Vote",UIcharSet$vote,F),
             selectInput(inputId = "bins",
                         label = "Target Names",
                         choices = c("BDD","Bilby","Darkwind","INeverCry","Jason Quinn","Legoktm","Lord Roem","Mattythewhite","Miniapolis","Mkdw",
@@ -397,15 +402,16 @@ sliderInput("EndDate",
             max = as.Date("06/05/13","%m/%d/%y"),
             value=as.Date("06/05/07"),timeFormat="%m/%d/%y"),
 sliderInput('vSize', UIcharSet$vSize, min=.5, max=5.5,
-            value=5, step=.1, round=0),
-sliderInput('eLWD', UIcharSet$eLWD, min=1, max=10,
-            value=3, step=0.2, round=0),
+            value=2, step=.1, round=0),
+sliderInput('eLWD', UIcharSet$eLWD, min=0.1, max=2,
+            value=1.5, step=0.1, round=0),
 selectInput('vfcolor', UIcharSet$vfcolor, colorSet,selected="black")
+
         ),
 
         # Show a plot of the generated distribution
         mainPanel(
-            plotOutput("distPlot", width=1200, height = 1200)
+            plotOutput("distPlot", width=800, height=800)
         )
     )
 ))
