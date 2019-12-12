@@ -16,7 +16,7 @@ shinyServer(function(input, output) {
     output$distPlot <- renderPlot({
         
         if(input$Name){
-            wiki = read.csv("/Users/michaelfuss/Documents/DMP_date.csv", header=FALSE)
+            wiki = read.csv("../Data/DMP_date.csv", header=FALSE)
             relations <- data.frame(from=wiki$V1,
                                     to=wiki$V2,
                                     weights=wiki$V3,
@@ -30,7 +30,7 @@ shinyServer(function(input, output) {
             l <- layout.fruchterman.reingold(g, niter=5000)
         }
         if(input$Date){
-            wiki = read.csv("/Users/michaelfuss/Documents/DMP_date.csv", header=FALSE)
+            wiki = read.csv("../Data/DMP_date.csv", header=FALSE)
             relations <- data.frame(from=wiki$V1,
                                     to=wiki$V2,
                                     weights=wiki$V3,
@@ -45,7 +45,7 @@ shinyServer(function(input, output) {
             l <- layout.fruchterman.reingold(g, niter=5000)
         }
         if(input$`Name and Date`){
-            wiki = read.csv("/Users/michaelfuss/Documents/DMP_date.csv", header=FALSE)
+            wiki = read.csv("../Data/DMP_date.csv", header=FALSE)
             relations <- data.frame(from=wiki$V1,
                                     to=wiki$V2,
                                     weights=wiki$V3,
